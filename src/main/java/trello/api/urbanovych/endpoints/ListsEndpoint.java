@@ -6,15 +6,17 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Collections;
 
+import static trello.api.urbanovych.properties.PropertiesHelper.getUrlProperties;
+
 public class ListsEndpoint {
 
-    private static String uri = "https://api.trello.com/1/lists";
+    private static String baseUrl = getUrlProperties();
 
     public static String postNewList(RestTemplate restTemplate, String name, String boardId, String key, String token) {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         UriComponentsBuilder builder = UriComponentsBuilder
-                .fromHttpUrl(uri)
+                .fromHttpUrl(baseUrl + "/lists")
                 .queryParam("name", name)
                 .queryParam("boardId", boardId)
                 .queryParam("key", key)
