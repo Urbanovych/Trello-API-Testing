@@ -1,8 +1,10 @@
 package trello.api.urbanovych;
 
+import org.springframework.http.HttpStatusCode;
 import org.springframework.web.client.RestTemplate;
 import trello.api.urbanovych.endpoints.BoardsEndpoint;
 import trello.api.urbanovych.endpoints.ListsEndpoint;
+import trello.api.urbanovych.objects.Board;
 
 import java.util.Properties;
 
@@ -16,8 +18,20 @@ public class TestHelperImpl implements TestHelper {
     private final String token = trelloAccess.getProperty("token");
 
     // BOARDS
-    public String getBoards() {
-        return BoardsEndpoint.getBoards(restTemplate, key, token);
+    public Board getBoard(String boardId) {
+        return BoardsEndpoint.getBoard(restTemplate, boardId, key, token);
+    }
+
+    public Board createBoard(String name) {
+        return BoardsEndpoint.createBoard(restTemplate, name, key, token);
+    }
+
+    public Board updateBoard(String boardId, String updatedName) {
+        return BoardsEndpoint.updateBoard(restTemplate, boardId, key, token, updatedName);
+    }
+
+    public HttpStatusCode deleteBoard(String boardId) {
+        return BoardsEndpoint.deleteBoard(restTemplate, boardId, key, token);
     }
 
     // LISTS
