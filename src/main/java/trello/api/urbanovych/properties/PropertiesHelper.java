@@ -24,8 +24,13 @@ public class PropertiesHelper {
         return properties;
     }
 
-    public static String getUrlProperties() {
+    public static String getBaseUrlProperties() {
         Properties urlProperties = getPropertiesFromPath("src/main/resources/url.properties");
         return urlProperties.getProperty("baseUrl");
+    }
+
+    public static String getEndpointProperties (String endpoint) {
+        Properties urlProperties = getPropertiesFromPath("src/main/resources/url.properties");
+        return urlProperties.getProperty(endpoint);
     }
 }

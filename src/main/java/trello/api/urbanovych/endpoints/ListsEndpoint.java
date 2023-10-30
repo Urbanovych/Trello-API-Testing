@@ -6,11 +6,11 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Collections;
 
-import static trello.api.urbanovych.properties.PropertiesHelper.getUrlProperties;
+import static trello.api.urbanovych.properties.PropertiesHelper.getBaseUrlProperties;
 
 public class ListsEndpoint {
 
-    private static String baseUrl = getUrlProperties();
+    private static String baseUrl = getBaseUrlProperties();
 
     public static String postNewList(RestTemplate restTemplate, String name, String boardId, String key, String token) {
         HttpHeaders headers = new HttpHeaders();
