@@ -1,7 +1,10 @@
 package trello.api.urbanovych.List;
 
-import org.junit.jupiter.api.*;
-import org.springframework.util.Assert;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.Assertions;
 import trello.api.urbanovych.TestHelperImpl;
 import trello.api.urbanovych.objects.BoardList;
 
@@ -31,7 +34,7 @@ public class ListTest {
         BoardList boardList = testHelper.createList(name, boardId);
 
         Assertions.assertNotNull(boardList.getId(), "ListId should not equal to null");
-        Assertions.assertEquals(name, boardList.getName(), "Name is not updated. List is not created");
+        Assertions.assertEquals(name, boardList.getName(), "Name is not equal to expected. List is not created");
     }
 
     @Test

@@ -2,7 +2,7 @@ package trello.api.urbanovych.objects;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-// Board object has a lot of parameters, cover only id and name.
+// Board POJO has a lot of parameters, cover only id and name.
 public class Board {
 
     @JsonProperty("id")

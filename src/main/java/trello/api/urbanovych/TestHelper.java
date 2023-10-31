@@ -1,9 +1,9 @@
 package trello.api.urbanovych;
 
 import org.springframework.http.HttpStatusCode;
-import org.springframework.web.client.RestTemplate;
 import trello.api.urbanovych.objects.Board;
 import trello.api.urbanovych.objects.BoardList;
+import trello.api.urbanovych.objects.Card;
 
 import java.util.List;
 
@@ -26,4 +26,13 @@ public interface TestHelper {
     BoardList createList(String name, String boardId);
 
     BoardList updateListTitle(String listId, String updatedName);
+
+    // CARDS
+    Card getCard(String cardId);
+
+    Card createCard(String listId, String name);
+
+    Card updateCardTitle(String cardId, String updatedName);
+
+    HttpStatusCode deleteCard(String cardId);
 }
