@@ -3,9 +3,11 @@ package trello.api.urbanovych;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.web.client.RestTemplate;
 import trello.api.urbanovych.endpoints.BoardsEndpoint;
+import trello.api.urbanovych.endpoints.CardEndpoint;
 import trello.api.urbanovych.endpoints.ListsEndpoint;
 import trello.api.urbanovych.objects.Board;
 import trello.api.urbanovych.objects.BoardList;
+import trello.api.urbanovych.objects.Card;
 
 import java.util.List;
 import java.util.Properties;
@@ -51,5 +53,22 @@ public class TestHelperImpl implements TestHelper {
 
     public BoardList updateListTitle(String listId, String updateName) {
         return ListsEndpoint.updateList(restTemplate, listId, updateName, key, token);
+    }
+
+    // CARDS
+    public Card getCard(String cardId) {
+        return CardEndpoint.getCard(restTemplate, cardId, key, token);
+    }
+
+    public Card createCard(String listId, String name) {
+        return CardEndpoint.createCard(restTemplate, listId, key, token, name);
+    }
+
+    public Card updateCardTitle(String cardId, String updatedName) {
+        return CardEndpoint.updateCard(restTemplate, cardId, key, token, updatedName);
+    }
+
+    public HttpStatusCode deleteCard(String cardId) {
+        return CardEndpoint.deleteCard(restTemplate, cardId, key, token);
     }
 }
