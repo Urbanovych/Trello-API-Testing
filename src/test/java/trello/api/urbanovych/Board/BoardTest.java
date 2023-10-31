@@ -1,3 +1,5 @@
+package trello.api.urbanovych.Board;
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -18,8 +20,8 @@ public class BoardTest {
 
     @AfterAll
     public void cleanup() {
-        for (String s : boardsToDeleting) {
-            testHelper.deleteBoard(s);
+        for (String boardId : boardsToDeleting) {
+            testHelper.deleteBoard(boardId);
         }
     }
 
@@ -49,10 +51,10 @@ public class BoardTest {
     public void updateBoardTitleTest() {
         String updatedName = "RestBoard-updatedBoardTest";
 
-        Board createBoard = testHelper.createBoard("RestBoard-BoardTest");
+        Board createBoard = testHelper.createBoard("RestBoard-Board.BoardTest");
         boardsToDeleting.add(createBoard.getId());
 
-        Board updateBoard = testHelper.updateBoard(createBoard.getId(),updatedName);
+        Board updateBoard = testHelper.updateBoardTitle(createBoard.getId(),updatedName);
 
         Assertions.assertEquals(createBoard.getId(), updateBoard.getId(), "Ids are not equal");
         Assertions.assertEquals(updatedName, updateBoard.getName(), "Name is not updated");

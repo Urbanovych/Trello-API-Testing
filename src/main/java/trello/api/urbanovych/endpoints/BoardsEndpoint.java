@@ -10,8 +10,10 @@ import org.springframework.http.MediaType;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 import trello.api.urbanovych.objects.Board;
+import trello.api.urbanovych.objects.BoardList;
 
 import java.util.Collections;
+import java.util.List;
 
 import static trello.api.urbanovych.properties.PropertiesHelper.getBaseUrlProperties;
 import static trello.api.urbanovych.properties.PropertiesHelper.getEndpointProperties;
@@ -93,5 +95,25 @@ public class BoardsEndpoint {
                 entity,
                 String.class);
         return result.getStatusCode();
+    }
+
+    public static List<BoardList> getListsOnBoard(RestTemplate restTemplate, String boardId, String key, String token) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Accept", String.valueOf(MediaType.APPLICATION_JSON));
+        UriComponentsBuilder builder = UriComponentsBuilder
+                .fromHttpUrl(baseUrl + endpointPath)
+                .pathSegment(boardId)
+                .pathSegment("lists")
+                .queryParam("key", key)
+                .queryParam("token", token);
+        HttpEntity<List<BoardList>> entity = new HttpEntity<>(headers);
+
+        ResponseEntity<List<BoardList>> result = restTemplate.exchange(
+                builder.toUriString(),
+                HttpMethod.GET,
+                entity,
+                new ParameterizedTypeReference<>() {
+                });
+        return result.getBody();
     }
 }
