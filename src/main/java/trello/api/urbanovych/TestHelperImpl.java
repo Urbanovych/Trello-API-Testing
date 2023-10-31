@@ -5,7 +5,9 @@ import org.springframework.web.client.RestTemplate;
 import trello.api.urbanovych.endpoints.BoardsEndpoint;
 import trello.api.urbanovych.endpoints.ListsEndpoint;
 import trello.api.urbanovych.objects.Board;
+import trello.api.urbanovych.objects.BoardList;
 
+import java.util.List;
 import java.util.Properties;
 
 import static trello.api.urbanovych.properties.PropertiesHelper.getPropertiesFromPath;
@@ -26,7 +28,7 @@ public class TestHelperImpl implements TestHelper {
         return BoardsEndpoint.createBoard(restTemplate, name, key, token);
     }
 
-    public Board updateBoard(String boardId, String updatedName) {
+    public Board updateBoardTitle(String boardId, String updatedName) {
         return BoardsEndpoint.updateBoard(restTemplate, boardId, key, token, updatedName);
     }
 
@@ -34,9 +36,20 @@ public class TestHelperImpl implements TestHelper {
         return BoardsEndpoint.deleteBoard(restTemplate, boardId, key, token);
     }
 
-    // LISTS
-    public String postNewList(String name, String boardId) {
-        return ListsEndpoint.postNewList(restTemplate, name, boardId, key, token);
+    public List<BoardList> getListsOnBoard(String boardId) {
+        return BoardsEndpoint.getListsOnBoard(restTemplate, boardId, key, token);
     }
 
+    // LISTS
+    public BoardList getList(String listId) {
+        return ListsEndpoint.getList(restTemplate, listId, key, token);
+    }
+
+    public BoardList createList(String name, String boardId) {
+        return ListsEndpoint.createList(restTemplate, name, boardId, key, token);
+    }
+
+    public BoardList updateListTitle(String listId, String updateName) {
+        return ListsEndpoint.updateList(restTemplate, listId, updateName, key, token);
+    }
 }
